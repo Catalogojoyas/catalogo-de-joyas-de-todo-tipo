@@ -1,0 +1,2706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogo - Joyería Moderna</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #d4af37;
+            --secondary: #1a1a1a;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--secondary) 0%, #333 100%);
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--primary);
+            color: var(--secondary);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Search Bar */
+        .search-container {
+            display: flex;
+            margin: 1rem auto;
+            max-width: 800px;
+            padding: 0 2rem;
+            margin-top: 80px;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-btn {
+            padding: 0 1.5rem;
+            background: var(--primary);
+            color: var(--secondary);
+            border: none;
+            border-radius: 0 30px 30px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            background: #e6b800;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Categories */
+        .categories {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .category-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-btn {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 1px solid var(--primary);
+            border-radius: 30px;
+            color: var(--secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Products */
+        .products {
+            padding: 4rem 2rem;
+            background: #f9f9f9;
+        }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 0.3rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .product-img {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .product-old-price {
+            text-decoration: line-through;
+            color: #ff0000;
+            font-size: 1rem;
+            margin-left: 0.5rem;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart, .view-details, .buy-now {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .add-to-cart {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .add-to-cart:hover {
+            background: #333;
+        }
+
+        .view-details {
+            background: white;
+            color: var(--secondary);
+            border: 1px solid #ddd;
+        }
+
+        .view-details:hover {
+            background: #f5f5f5;
+        }
+
+        .buy-now {
+            background: #25D366;
+            color: white;
+        }
+
+        .buy-now:hover {
+            background: #128C7E;
+        }
+
+        /* Product Modal */
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .product-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 10px;
+            position: relative;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--secondary);
+        }
+
+        .modal-images {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .main-image {
+            height: 400px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .thumbnail {
+            width: 70px;
+            height: 70px;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .thumbnail.active {
+            border-color: var(--primary);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-details {
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+                color: var(--secondary);
+            }
+        }
+
+        .modal-category {
+            color: #777;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .modal-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .modal-old-price {
+            text-decoration: line-through;
+            color: #ff0000;
+            font-size: 1.3rem;
+            margin-left: 0.5rem;
+        }
+
+        .modal-description {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Options Selector */
+        .options-selector {
+            margin-bottom: 1.5rem;
+        }
+
+        .option-group {
+            margin-bottom: 1rem;
+        }
+
+        .option-group h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--secondary);
+        }
+
+        .option-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .option-btn {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .option-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .option-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-actions .add-to-cart {
+            flex-grow: 1;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: var(--transition);
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-header h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+            transition: var(--transition);
+        }
+
+        .close-cart:hover {
+            color: var(--secondary);
+            transform: rotate(90deg);
+        }
+
+        .cart-items {
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .cart-item-variant {
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 0.2rem;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            color: #ff0000;
+        }
+
+        .cart-total {
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .cart-total h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .total-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--secondary);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .checkout-btn:hover {
+            background: #e6b800;
+        }
+
+        .checkout-btn i {
+            margin-right: 0.5rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Navigation arrows for thumbnails */
+        .thumbnail-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .thumbnail-nav:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
+        .thumbnail-prev {
+            left: 10px;
+        }
+
+        .thumbnail-next {
+            right: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .products-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .modal-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-images {
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .cart-sidebar {
+                width: 350px;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .add-to-cart, .view-details, .buy-now {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                height: 70vh;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.5rem;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+            
+            .modal-actions button {
+                width: 100%;
+            }
+            
+            .option-buttons {
+                gap: 0.3rem;
+            }
+            
+            .option-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .search-container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1100;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        .notification.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-gem"></i>
+            <h1>Catalogo<span>Joyas</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#categories">Categorías</a></li>
+                <li><a href="#products">Productos</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon" id="cart-icon">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" class="search-input" id="search-input" placeholder="Buscar productos...">
+        <button class="search-btn" id="search-btn">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Colección Exclusiva 2025</h2>
+            <p>Descubre nuestras joyas únicas diseñadas para destacar tu elegancia y estilo.</p>
+            <a href="#products" class="btn">Explorar Colección</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="section-title">
+            <h2>Nuestras Categorías</h2>
+        </div>
+        <div class="category-buttons">
+            <button class="category-btn active" data-category="all">Todas</button>
+            <button class="category-btn" data-category="anillos">Anillos</button>
+            <button class="category-btn" data-category="collares">Collares</button>
+            <button class="category-btn" data-category="pulseras">Pulseras</button>
+            <button class="category-btn" data-category="aretes">Aretes</button>
+            <button class="category-btn" data-category="ropa">Ropa</button>
+            <button class="category-btn" data-category="audifonos">Audífonos</button>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-title">
+            <h2>Nuestras Joyas</h2>
+        </div>
+        <div class="products-container" id="products-container">
+            <!-- Productos se cargarán dinámicamente con JavaScript -->
+        </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div class="product-modal" id="product-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-images">
+                <div class="main-image">
+                    <img id="modal-main-image" src="" alt="">
+                </div>
+                <div class="thumbnail-container" id="thumbnail-container">
+                    <!-- Miniaturas se cargarán dinámicamente -->
+                </div>
+                <button class="thumbnail-nav thumbnail-prev" id="thumbnail-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="thumbnail-nav thumbnail-next" id="thumbnail-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="modal-details">
+                <h2 id="modal-title"></h2>
+                <span class="modal-category" id="modal-category"></span>
+                <div class="modal-price">
+                    <span id="modal-price"></span>
+                    <span class="modal-old-price" id="modal-old-price"></span>
+                </div>
+                <p class="modal-description" id="modal-description"></p>
+                
+                <!-- Selector de opciones -->
+                <div class="options-selector" id="options-selector">
+                    <!-- Se cargará dinámicamente según el tipo de producto -->
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="add-to-cart" id="modal-add-to-cart">Añadir al carrito</button>
+                    <button class="buy-now" id="modal-buy-now">
+                        <i class="fab fa-whatsapp"></i> Comprar ahora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart" id="close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Ítems del carrito se cargarán dinámicamente -->
+        </div>
+        <div class="cart-total">
+            <h4>Total: <span class="total-price" id="total-price">S/0.00</span></h4>
+            <button class="checkout-btn" id="checkout-btn">
+                <i class="fab fa-whatsapp"></i> Completar Compra
+            </button>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Catalogo Joyas. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Datos de los productos en Soles Peruanos (PEN)
+        const products = [
+            // Anillos (10 productos)
+            {
+                id: 1,
+                title: "Anillo de Acero inoxidable",
+                category: "anillos",
+                price: 13,
+                oldPrice: 22,
+                discount: 35,
+                description: "Juego de dos piezas con estrella y luna en Zirconia, Acero inoxidable.",
+                images: [
+                    "https://i.imgur.com/jebx6sC.png",
+                    "https://i.imgur.com/LObtGDU.png"
+                    
+                ],
+                sizes: [5, 6, 7, 8, 9, 10, 11, 12],
+                
+            },
+            {
+                id: 2,
+                title: "Anillo de Acero de titanio de lujo",
+                category: "anillos",
+                price: 15,
+                description: "1 pieza de anillo de acero de titanio de lujo elegante, chapado en oro de 18 quilates, incrustación de circonita sintética, tema de corazón.",
+                images: [
+                    "https://i.imgur.com/0UUCdkd.png"
+                    
+                ],
+                sizes: [5, 6, 7, 8, 9, 10, 11, 12],
+                
+            },
+            {
+                id: 3,
+                title: "Anillo de Plata 925",
+                category: "anillos",
+                price: 15,
+                oldPrice: 25,
+                discount: 40,
+                description: "Anillo Elegante de Plata de Ley 925 con Corazón Rosa y Diseño Geométrico, Piedra de Nacimiento de Abril, Perfecto para atuendo Casual.",
+                images: [
+                    "https://i.imgur.com/5ILigI8.png",
+                    "https://i.imgur.com/F1LRUqB.png"
+                    
+                ],
+                sizes: [5, 6, 7, 8, 9, 10, 11, 12],
+                
+            },
+            {
+                id: 4,
+                title: "Anillo de circonita 3A chapado en plata 925",
+                category: "anillos",
+                price: 25,
+                description: "Anillo de compromiso de circonita en froma de corazón elegante, chapado en plata 925 con circonita cúbica 3A disponible en varios colores.",
+                images: [
+                    "https://i.imgur.com/LlbCw6v.png",
+                    "https://i.imgur.com/4z59FjP.png",
+                    "https://i.imgur.com/dbloj0R.png",
+                    "https://i.imgur.com/PyEB1zm.png",
+                    "https://i.imgur.com/PoGYeqa.png",
+                    "https://i.imgur.com/vgugul8.png",
+                    "https://i.imgur.com/djZkyDd.png",
+                ],
+                sizes: [6, 7, 8, 9, 10],
+                colors: ["Púrpura", "Rosa", "Blanco", "Verde", "celeste", "Cielo azul", "rojo"]
+            },
+            {
+                id: 5,
+                title: "Anillo con corte cuadrado y piedra cúbica acero inoxidable",
+                category: "anillos",
+                price: 10,
+                oldPrice: 15,
+                discount: 33,
+                description: "Anillo de compromiso de acero inoxidable elegante.",
+                images: [
+                    "https://i.imgur.com/b7rSkTG.png",
+                    "https://i.imgur.com/kOtAP2Z.png",
+                    "https://i.imgur.com/kVEOtnj.png"
+                ],
+                sizes: [5, 6, 7, 8, 9, 10, 11],
+                colors: ["Plateado", "Rosa dorado", "Dorado"]
+            },
+            {
+                id: 6,
+                title: "Anillo de dama de acero inoxidable",
+                category: "anillos",
+                price: 10,
+                description: "Anillo elegante de corazón negro de acero inoxidable romantico y versátil, adecuado para uso diario.",
+                images: [
+                    "https://i.imgur.com/BgH16BY.png",
+                    "https://i.imgur.com/Wsbkgyi.png",
+                    "https://i.imgur.com/BZeR06r.png"
+                ],
+                sizes: [6, 7, 8, 9],
+                colors: ["Dorado", "Plateado", "Rosa dorado"]
+            },
+            {
+                id: 7,
+                title: "Anillo de circonita bañado en oro de 18k",
+                category: "anillos",
+                price: 16,
+                oldPrice: 20,
+                discount: 20,
+                description: "Anillo de Promesa elegante para mujer de corazón con Circonita escarlata bañado en oro de 18k con montura de tres garras.",
+                images: [
+                    "https://i.imgur.com/TUmsqiu.png",
+                    "https://i.imgur.com/QwgptMA.png",
+                    "https://i.imgur.com/5OJFuYz.png"
+                ],
+                sizes: [6, 7, 8, 9, 10],
+                
+            },
+            {
+                id: 8,
+                title: "Anillo elegante de Zirconia bañado en oro blanco",
+                category: "anillos",
+                price: 14,
+                description: "Anillo de Zirconia bañado en oro blanco con cuatro garras, ideal para uso diario, piedra nacida en abril.",
+                images: [
+                    "https://i.imgur.com/8SESpEm.png",
+                    "https://i.imgur.com/tm3083y.png",
+                    "https://i.imgur.com/0Ef64AU.png"
+                ],
+                sizes: [5, 6, 7, 8, 9, 10, 11, 12],
+                colors: ["Plateado", "Dorado"]
+            },
+            {
+                id: 9,
+                title: "Anillo de corazón con Zirconia bañado en oro rosado",
+                category: "anillos",
+                price: 20,
+                oldPrice: 35,
+                discount: 54,
+                description: "Anillo de corazón ovalado rosa con zirconia y bañado en oro rosado, elegante anillo artesania fina.",
+                images: [
+                    "https://i.imgur.com/5UKIy0J.png",
+                    "https://i.imgur.com/bAYYqP2.png",
+                    "https://i.imgur.com/tjUWRe3.png"
+                ],
+                sizes: [5, 6, 7, 8, 9, 10],
+                
+            },
+            {
+                id: 10,
+                title: "Anilllo circonita KC chapado en oro",
+                category: "anillos",
+                price: 16,
+                description: "Anillo elegante multicolor, adecuados para fiestas y diario, circonita kc chapado en oro",
+                images: [
+                    "https://i.imgur.com/pEYeC6h.png",
+                    "https://i.imgur.com/89ER18d.png",
+                    "https://i.imgur.com/YU5eKg4.png"
+                ],
+                sizes: [6, 7, 8, 9, 10],
+                
+            },
+            
+            // Collares (10 productos)
+            {
+                id: 11,
+                title: "Collar con colgante de piedra ojo de gato acero inoxidable",
+                category: "collares",
+                price: 14,
+                description: "Collar dorado con colgante de piedra ojo de gato en forma de lágrima, cadena de acero inoxidable bañado en oro de 18 quilates.",
+                images: [
+                    "https://i.imgur.com/4f2OVlc.png",
+                    "https://i.imgur.com/iHCfBQ1.png",
+                    "https://i.imgur.com/mFaGoau.png"
+                ],
+                
+            },
+            {
+                id: 12,
+                title: "Collar con colgante de corazón chapado en oro de 18 quilates",
+                category: "collares",
+                price: 17,
+                description: "Collar con colgante de corazón chapado en oro de 18 quilates de acero inoxidable, elegante joyeria.",
+                images: [
+                    "https://i.imgur.com/AQVslmI.png",
+                    "https://i.imgur.com/pUVMWJW.png",
+                    "https://i.imgur.com/qNrvjoR.png"
+                ],
+                
+            },
+            {
+                id: 13,
+                title: "Collar de acero inoxidable",
+                category: "collares",
+                price: 14,
+                oldPrice: 20,
+                discount: 30,
+                description: "Collar elegante de acero inoxidable 304L chapado en oro de 18 quilates.",
+                images: [
+                    "https://i.imgur.com/6ShibHC.png",
+                    "https://i.imgur.com/AsLoXl4.png",
+                    "https://i.imgur.com/ET3O2KB.png"
+                ],
+                
+            },
+            {
+                id: 14,
+                title: "Juego de joyería de acero inoxidable, collar, aretes y pulsera",
+                category: "collares",
+                price: 27,
+                description: "Jugo de joyería de acero inoxidable bañado en oro de 18k, collar, aretes y pulsera.",
+                images: [
+                    "https://i.imgur.com/MDjtm1k.png",
+                    "https://i.imgur.com/2xfKLDP.png",
+                    "https://i.imgur.com/dNdFTEC.png",
+                    "https://i.imgur.com/X3usMXk.png",
+                    "https://i.imgur.com/8Xmk3BE.png"
+                ],
+                
+            },
+            {
+                id: 15,
+                title: "Collar cadena de clavícula cadena de acero inoxidable",
+                category: "collares",
+                price: 12,
+                oldPrice: 17,
+                discount: 29,
+                description: "Collar cadena de clavícula cadena de acero inoxidable, joyeria fina.",
+                images: [
+                    "https://i.imgur.com/09ALu9s.png",
+                    "https://i.imgur.com/K5fz7s1.png",
+                    "https://i.imgur.com/DIN0qHe.png"
+                ],
+                
+            },
+            {
+                id: 16,
+                title: "Conjunto de 3 piezas Collar, Pulsera y Cadena de tobillo",
+                category: "collares",
+                price: 20,
+                oldPrice: 30,
+                discount: 33,
+                description: "Conjunto de 3 piezas de joyeria de plata s925 con Zirconia brillante",
+                images: [
+                    "https://i.imgur.com/d1WzdnC.png",
+                    "https://i.imgur.com/UCPGeSH.png",
+                    "https://i.imgur.com/d1WzdnC.png"
+                ],
+                colors: ["Plata", "Oro", "Negro"]
+            },
+            {
+                id: 17,
+                title: "Collar de cadena serpiente plata 925",
+                category: "collares",
+                price: 15,
+                description: "Collar de cadena serpiente plata 925 elegante con cuentas, joyeria de lujo y lindo colgante.",
+                images: [
+                    "https://i.imgur.com/jVnRj2f.png",
+                    "https://i.imgur.com/f26yHcp.png",
+                    "https://i.imgur.com/FKciC41.png"
+                ],
+                
+            },
+            {
+                id: 18,
+                title: "Collar de Moissanita de plata 925 de 1 quilate",
+                category: "collares",
+                price: 27,
+                oldPrice: 39,
+                discount: 30,
+                description: "Collar de Moissanita de plata 925 de 1 quilate, multifuncional joyeria brillante.",
+                images: [
+                    "https://i.imgur.com/jpXfGG1.png",
+                    "https://i.imgur.com/DkCOLMM.png",
+                    "https://i.imgur.com/dNx8yMk.png"
+                ],
+                
+            },
+            {
+                id: 19,
+                title: "Collar de lujo en forma de corazón de acero de titanio",
+                category: "collares",
+                price: 23,
+                description: "Collar de lujo en forma de corazón de acero de titanio bañado en platino.",
+                images: [
+                    "https://i.imgur.com/eyZqxxe.png",
+                    "https://i.imgur.com/gNU7Gpn.png",
+                    "https://i.imgur.com/4ODHO0V.png"
+                ],
+                
+            },
+            {
+                id: 20,
+                title: "Collar de titanio bañado en oro 18k retro",
+                category: "collares",
+                price: 14,
+                oldPrice: 25,
+                discount: 44,
+                description: "Collar de titanio bañado en oro 18k retro en forma de gota de agua, joyeria elegante.",
+                images: [
+                    "https://i.imgur.com/9iKBy1B.png",
+                    "https://i.imgur.com/5ripwMj.png",
+                    "https://i.imgur.com/djMeFQz.png"
+                ],
+                
+            },
+            
+            // Pulseras (10 productos)
+            {
+                id: 21,
+                title: "Pulsera de plata 925 de bajo alergénico",
+                category: "pulseras",
+                price: 20,
+                description: "Pulsera de plata 925 de bajo alergénico para mujeres, fresca y sotisficada.",
+                images: [
+                    "https://i.imgur.com/UNHVX16.png",
+                    "https://i.imgur.com/GJu4Isp.png",
+                    "https://i.imgur.com/cQlu3cy.png"
+                ],
+                
+            },
+            {
+                id: 22,
+                title: "Pulsera con corazon brillante del océano",
+                category: "pulseras",
+                price: 8,
+                oldPrice: 13,
+                discount: 38,
+                description: "Pulsera con corazon brillante del océano, joyeria elegante y de moda.",
+                images: [
+                    "https://i.imgur.com/cGupkPG.png",
+                    "https://i.imgur.com/i4VWEhz.png",
+                    "https://i.imgur.com/x73ZV0N.png"
+                ],
+                
+            },
+            {
+                id: 23,
+                title: "Pulsera de plata 925",
+                category: "pulseras",
+                price: 17,
+                description: "Pulsera de plata 925 diseño redondo con cuentas plateadas moderno.",
+                images: [
+                    "https://i.imgur.com/C7TWNSD.png",
+                    "https://i.imgur.com/TV8W728.png",
+                    "https://i.imgur.com/Fo4PA1p.png"
+                ],
+                
+            },
+            {
+                id: 24,
+                title: "Pulsera de de circonita cúbica de plata esterlina 925",
+                category: "pulseras",
+                price: 17,
+                description: "Pulsera de de circonita cúbica de plata esterlina 925, joyeria ajustable accesorio elegante.",
+                images: [
+                    "https://i.imgur.com/33xV8qu.png",
+                    "https://i.imgur.com/y3ReyHM.png",
+                    "https://i.imgur.com/HB5Vqi8.png"
+                ],
+                
+            },
+            {
+                id: 25,
+                title: "Pulsera de plata esterlina 925",
+                category: "pulseras",
+                price: 18,
+                oldPrice: 25,
+                discount: 28,
+                description: "Pulsera de plata esterlina 925 joyeria elegante y fina.",
+                images: [
+                    "https://i.imgur.com/mSmNjFQ.png",
+                    "https://i.imgur.com/U0Dwdwt.png",
+                    "https://i.imgur.com/YVQPXOb.png"
+                ],
+                
+            },
+            {
+                id: 26,
+                title: "Pulsera de cuentas de estrella",
+                category: "pulseras",
+                price: 8,
+                description: "Pulsera de cuentas de estrella, ideal para fiestas y ocasiones especiales",
+                images: [
+                    "https://i.imgur.com/reu6kx4.png",
+                    "https://i.imgur.com/C1ugRDm.png",
+                    "https://i.imgur.com/reu6kx4.png"
+                ],
+                
+            },
+            {
+                id: 27,
+                title: "Pulsera de acero inoxidable de alta calidad chapado en oro de 18 quilates",
+                category: "pulseras",
+                price: 14,
+                oldPrice: 20,
+                discount: 30,
+                description: "Pulsera de acero inoxidable de alta calidad chapado en oro de 18 quilates, accesorio minimalista y elegante",
+                images: [
+                    "https://i.imgur.com/nV5jMtm.png",
+                    "https://i.imgur.com/QrJQhiz.png",
+                    "https://i.imgur.com/MI0N5om.png"
+                ],
+                
+            },
+            {
+                id: 28,
+                title: "Pulsera con corazón brillante",
+                category: "pulseras",
+                price: 10,
+                description: "Pulsera de estilo y2K con corazón brillante de acero inoxidable ideal para uso diario",
+                images: [
+                    "https://i.imgur.com/oBF6oTU.png",
+                    "https://i.imgur.com/Vygg0vQ.png",
+                    "https://i.imgur.com/IHhGKFU.png"
+                ],
+                colors: ["Azul", "Lago Azul"]
+            },
+            {
+                id: 29,
+                title: "Pulsera estilo bohemio",
+                category: "pulseras",
+                price: 8,
+                description: "Pulsera estilo bohemio, elegante cadena con colgante de rama y fénix",
+                images: [
+                    "https://i.imgur.com/uOR8WVJ.png",
+                    "https://i.imgur.com/BhvSpGJ.png",
+                    "https://i.imgur.com/xcYdtoV.png"
+                ],
+                
+            },
+            {
+                id: 30,
+                title: "Conjunto de pulsera y collar amatista",
+                category: "pulseras",
+                price: 15,
+                oldPrice: 25,
+                discount: 40,
+                description: "Conjunto de pulsera y collar amatista elegante.",
+                images: [
+                    "https://i.imgur.com/4SK9sIV.png",
+                    "https://i.imgur.com/u1FvhMK.png",
+                    "https://i.imgur.com/2VEtMsp.png"
+                ],
+                
+            },
+            
+            // Aretes (10 productos)
+            {
+                id: 31,
+                title: "3 unidades de Pendientes y Collar de Gato Morado Brillante",
+                category: "aretes",
+                price: 8,
+                description: "unidades de Pendientes y Collar de Gato Morado Brillante - Regalo de Joyería Minimalista Estilosa para Familiares y Amigos.",
+                images: [
+                    "https://i.imgur.com/A8FDryy.png",
+                    "https://i.imgur.com/gt4Vrtl.png",
+                    "https://i.imgur.com/q11xIOo.png"
+                    
+                ],
+                
+            },
+            {
+                id: 32,
+                title: "Conjunto de aretes y collar",
+                category: "aretes",
+                price: 12,
+                oldPrice: 20,
+                discount: 40,
+                description: "Conjunto de aretes y collar, lujoso personalizado elegante y hermoso collar de gota de agua pendientes.",
+                images: [
+                    "https://i.imgur.com/yj60oJa.png",
+                    "https://i.imgur.com/tXv9cVx.png",
+                    "https://i.imgur.com/AgvlT9D.png"
+                ],
+                
+            },
+            {
+                id: 33,
+                title: "Aretes de plata 925 chapado en oro de 14k",
+                category: "aretes",
+                price: 13,
+                description: "Aretes de plata 925 chapado en oro de 14k de lujo azul elegante.",
+                images: [
+                    "https://i.imgur.com/OAs3Y5j.png",
+                    "https://i.imgur.com/U0fZe6M.png",
+                    "https://i.imgur.com/hsvIdrs.png"
+                ],
+                
+            },
+            {
+                id: 34,
+                title: "Aretes de plata 925",
+                category: "aretes",
+                price: 11,
+                description: "Aretes de plata 925 de corazón con forma de gota, accesorio de fiesta y regalo, joyería elegante para mujer para todas las estaciones.",
+                images: [
+                    "https://i.imgur.com/HCkc5QQ.png",
+                    "https://i.imgur.com/2c2G12j.png",
+                    "https://i.imgur.com/dZEG9oG.png"
+                ],
+                
+            },
+            {
+                id: 35,
+                title: "Aretes de plata 925 aro doble",
+                category: "aretes",
+                price: 15,
+                oldPrice: 29,
+                discount: 48,
+                description: "Aretes de plata 925 chapado en oro de 18 quilates.",
+                images: [
+                    "https://i.imgur.com/aAr2KTD.png",
+                    "https://i.imgur.com/7yKPLRn.png",
+                    "https://i.imgur.com/rY3nG7U.png"
+                ],
+                
+            },
+            {
+                id: 36,
+                title: "Aretes de plata esterlina 925 con Zirconia",
+                category: "aretes",
+                price: 15,
+                oldPrice: 20,
+                discount: 25,
+                description: "Aretes de plata esterlina 925 con Zirconia Cúbica azul",
+                images: [
+                    "https://i.imgur.com/yGdu3db.png",
+                    "https://i.imgur.com/uHmJJst.png",
+                    "https://i.imgur.com/x6pT5e5.png"
+                ],
+                
+            },
+            {
+                id: 37,
+                title: "Aretes de plata esterlina 925 chapado en oro de 14 quilates",
+                category: "aretes",
+                price: 11,
+                description: "Aretes de plata esterlina 925 chapado en oro de 14 quilates anti-alergénicos.",
+                images: [
+                    "https://i.imgur.com/x7krMbK.png",
+                    "https://i.imgur.com/X6ZNDAo.png",
+                    "https://i.imgur.com/ejx4xPL.png"
+                ],
+                
+            },
+            {
+                id: 38,
+                title: "Arete de acero inoxidable 316 con baño de oro 18K",
+                category: "aretes",
+                price: 13,
+                oldPrice: 20,
+                discount: 35,
+                description: "Arete grande de acero inoxidable 316 con baño de oro 18K en forma de lágrima, anti-alérgico, ideal para uso diario y fiestas.",
+                images: [
+                    "https://i.imgur.com/freY719.png",
+                    "https://i.imgur.com/rNJXPBy.png",
+                    "https://i.imgur.com/kwUw9JQ.png"
+                ],
+                
+            },
+            {
+                id: 39,
+                title: "Conjunto de aretes y collar chapado en plata",
+                category: "aretes",
+                price: 17,
+                description: "Conjunto de aretes y collar chapado en plata, brillantes detalles de pedrería.",
+                images: [
+                    "https://i.imgur.com/qwCTwkG.png",
+                    "https://i.imgur.com/xFVGjC5.png",
+                    "https://i.imgur.com/0eZdyyG.png"
+                ],
+                
+            },
+            {
+                id: 40,
+                title: "Aretes con forma de corazón con diseño de flor",
+                category: "aretes",
+                price: 10,
+                oldPrice: 14,
+                discount: 28,
+                description: "Aretes con forma de corazón con diseño de flor acero inoxidable.",
+                images: [
+                    "https://i.imgur.com/BJOscgl.png",
+                    "https://i.imgur.com/knCLe3n.png",
+                    "https://i.imgur.com/2lDLDTm.png"
+                ],
+                
+            },
+            
+            // Ropa (10 productos)
+            {
+                id: 41,
+                title: "Camisa de manga corta para mujer",
+                category: "ropa",
+                price: 45,
+                description: "Camisa de manga corta para mujer con parche de malla y flores bordadas 100% poliéster.",
+                images: [
+                    "https://i.imgur.com/wjpNj8N.png",
+                    "https://i.imgur.com/jZymINS.png",
+                    "https://i.imgur.com/YcmKlT7.png"
+                ],
+                sizes: ['S', 'M', 'L', 'XL'],
+                
+            },
+            {
+                id: 42,
+                title: "Chaqueta de fleece elegante",
+                category: "ropa",
+                price: 98,
+                oldPrice: 128,
+                discount: 23,
+                description: "Chaqueta de fleece elegante para mujer, tela de punto de poliéster.",
+                images: [
+                    "https://i.imgur.com/KCx0FNg.png",
+                    "https://i.imgur.com/ngmZCcN.png",
+                    "https://i.imgur.com/QDvhPGR.png",
+                    "https://i.imgur.com/6ru7pKZ.png"
+                ],
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: ['Rojo', 'Chocolate']
+            },
+            {
+                id: 43,
+                title: "Paquete de 3 leggins Capri",
+                category: "ropa",
+                price: 85,
+                description: "Paquete de 3 leggins Capri de cintura alta para mujer con control abdominal, super suaves, opacas, elásticas.",
+                images: [
+                    "https://i.imgur.com/6d82gQr.png",
+                    "https://i.imgur.com/ZQPVZkt.png",
+                    "https://i.imgur.com/0NQXCvc.png"
+                ],
+                sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+                
+            },
+            {
+                id: 44,
+                title: "Paquete de 5 unidades de pantalones capri",
+                category: "ropa",
+                price: 125,
+                oldPrice: 155,
+                discount: 19,
+                description: "5 unidades de pantalones capri de mujer súper suaves - Alta cintura, sin transparencia, leggings de entrenamiento para yoga, correr y actividades al aire libre, colores sólidos.",
+                images: [
+                    "https://i.imgur.com/heLMwyt.png",
+                    "https://i.imgur.com/rLAsafE.png",
+                    "https://i.imgur.com/zWZER5B.png"
+                ],
+                sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+                
+            },
+            {
+                id: 45,
+                title: "Conjunto de ropa casual para niño con estampado de corona de rey",
+                category: "ropa",
+                price: 95,
+                description: "Conjunto de ropa casual para niño con estampado de corona de rey, sudadera cómoda de manga larga con bolsillo canguro y pantalones de chándal con cintura elástica.",
+                images: [
+                    "https://i.imgur.com/ZMsuPmV.png",
+                    "https://i.imgur.com/UkOdeJ0.png",
+                    "https://i.imgur.com/VrraG1a.png"
+                ],
+                sizes: ['5-6Y', '7-8Y', '9-10Y', '11-12Y', '13Y', '14-15Y'],
+                
+            },
+            {
+                id: 46,
+                title: "Tops Abrigo con Bolsillo",
+                category: "ropa",
+                price: 75,
+                oldPrice: 95,
+                discount: 21,
+                description: " Elegante Cuello de Solapa Color Sólido Poliéster.",
+                images: [
+                    "https://i.imgur.com/cuCpZGb.png",
+                    "https://i.imgur.com/aCMgK1y.png",
+                    "https://i.imgur.com/skoSVwo.png",
+                    "https://i.imgur.com/HcwaYb5.png"
+                ],
+                sizes: ['3-4Y', '4-5Y', '5-6Y', '7-8Y', '9-10Y', '11-12Y'],
+                colors: ['Caqui', 'Rosa rojo']
+            },
+            {
+                id: 47,
+                title: "Conjunto de pantalón y polo",
+                category: "ropa",
+                price: 45,
+                description: "Conjunto de pantalón y polo, con estampado de letras para mujer, top de manga corta con cuello redondo y pantalones jogger, cómodo y de ajuste relajado.",
+                images: [
+                    "https://i.imgur.com/Mgdjppj.png",
+                    "https://i.imgur.com/yjrnySh.png",
+                    "https://i.imgur.com/yVUH8s0.png"
+                ],
+                sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+                colors: ['Canela']
+            },
+            {
+                id: 48,
+                title: "Capris de yoga de cintura",
+                category: "ropa",
+                price: 45,
+                oldPrice: 58,
+                discount: 22,
+                description: "Capris de yoga de cintura alta con bloques de color y bolsillos para mujer, leggings deportivos de control de abdomen.",
+                images: [
+                    "https://i.imgur.com/mNk9CHu.png",
+                    "https://i.imgur.com/iawCbWu.png",
+                    "https://i.imgur.com/VhB86Pj.png"
+                ],
+                sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+                
+            },
+            {
+                id: 49,
+                title: "Vestido elegante",
+                category: "ropa",
+                price: 58,
+                description: "Vestido elegante de manga larga con cuello volado y cinturón para niñas - Vestido midi beige para primavera y otoño.",
+                images: [
+                    "https://i.imgur.com/mksoP3l.png",
+                    "https://i.imgur.com/aYcSjEA.png",
+                    "https://i.imgur.com/npb2Pyy.png"
+                ],
+                sizes: ['3-4Y', '4-5Y', '5-6Y', '7-8Y', '9-10Y'],
+                
+            },
+            {
+                id: 50,
+                title: "5 piezas aleatorias de sudaderas con capucha",
+                category: "ropa",
+                price: 150,
+                description: "5-Pack de sudaderas con capucha de moda para niños - Pullovers informales de manga larga con bolsillo frontal, tejido de punto suave y cómodo.",
+                images: [
+                    "https://i.imgur.com/yv4YhIv.png",
+                    "https://i.imgur.com/ESO6dxq.png",
+                    "https://i.imgur.com/ai8TUA4.png"
+                ],
+                sizes: ['5-6Y', '7-8Y', '9-10Y', '11-12Y', '13Y'],
+                
+            },
+            {
+                id: 51,
+                title: "Conjunto de 2 piezas",
+                category: "ropa",
+                price: 60,
+                description: "Un conjunto de 2 piezas con estampados de dibujos animados clásicos, sudadera con capucha elegante y pantalones largos, perfecto para otoño e invierno con forro polar.",
+                images: [
+                    "https://i.imgur.com/5kWUAVm.png",
+                    "https://i.imgur.com/tzWOhwi.png",
+                    "https://i.imgur.com/b8jxUvV.png"
+                ],
+                sizes: ['5-6Y', '7-8Y', '9-10Y', '11-12Y', '13Y'],
+                
+            },
+            {
+                id: 52,
+                title: "Pantalón con capucha",
+                category: "ropa",
+                price: 75,
+                description: "Pantalones de mujer de tejido de punto de un solo color con capucha elegante de poliéster.",
+                images: [
+                    "https://i.imgur.com/q8OroNf.png",
+                    "https://i.imgur.com/yUJjYsH.png",
+                    "https://i.imgur.com/odQfbVY.png",
+                    "https://i.imgur.com/Cg5HZKc.png",
+                    "https://i.imgur.com/IWbcUqM.png"
+                ],
+                sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+                colors: ['Caqui', 'Gris', 'Aceituna', 'Color café', 'Púrpura']
+            },
+            
+            // Audífonos (10 productos)
+            {
+                id: 53,
+                title: "Auricular inalámbrico estéreo con cancelación de ruido",
+                category: "audifonos",
+                price: 15,
+                oldPrice: 20,
+                discount: 25,
+                description: "Auricular inalámbrico estéreo con cancelación de ruido, auriculares inalámbricos en el oído, auriculares inalámbricos táctiles, estuche de carga de auriculares inalámbricos, control de reproductor de música y auriculares electrónicos.",
+                images: [
+                    "https://i.imgur.com/fL762ri.png",
+                    "https://i.imgur.com/WQUE9H3.png",
+                    "https://i.imgur.com/0DNJ1mS.png"
+                ],
+                
+            },
+            {
+                id: 54,
+                title: "Audífonos Inalámbricos Elegantes con Pantalla Digital",
+                category: "audifonos",
+                price: 22,
+                description: "Audífonos Inalámbricos TWS Elegantes con Pantalla Digital, Diseño Beige/Blanco, Ajuste Cómodo, Batería Recargable, Regalo Ideal para Fiestas, Auriculares Sin Cables.",
+                images: [
+                    "https://i.imgur.com/RCIZePH.png",
+                    "https://i.imgur.com/gvHoJtm.png",
+                    "https://i.imgur.com/cT5EMn1.png"
+                ],
+                colors: ['Negro', 'Blanco', 'Beige claro']
+            },
+            {
+                id: 55,
+                title: "KZ ZSN Pro X-auriculares",
+                category: "audifonos",
+                price: 60,
+                oldPrice: 78,
+                discount: 23,
+                description: "KZ ZSN Pro X-auriculares Intrauditivos Con Controlador Dual, Cascos Con Cable 1BA 1DD.",
+                images: [
+                    "https://i.imgur.com/QHhhJrV.png",
+                    "https://i.imgur.com/opExUx1.png",
+                    "https://i.imgur.com/4nyXUMj.png",
+                    "https://i.imgur.com/UPbpYNq.png"
+                ],
+                colors: ['Negro', 'Dorado', 'Celeste']
+            },
+            {
+                id: 56,
+                title: "Audífonos Inalámbricos TWS Acer 2025",
+                category: "audifonos",
+                price: 35,
+                description: "Audífonos Inalámbricos TWS Acer 2025 con Graves Potentes, Cancelación de Ruido Estéreo para Llamadas, Ultra Duraderos, Modo Gaming con Baja Latencia, Diseño Ligero y Táctil, Compatibles con Múltiples Dispositivos.",
+                images: [
+                    "https://i.imgur.com/NWoiT1l.png",
+                    "https://i.imgur.com/oTsJrGt.png",
+                    "https://i.imgur.com/wJLCaJt.png"
+                ],
+                colors: ['Negro', 'Azul', 'Gris']
+            },
+            {
+                id: 57,
+                title: "Mini Auriculares Inalámbricos",
+                category: "audifonos",
+                price: 14,
+                oldPrice: 18,
+                discount: 22,
+                description: "Mini Auriculares Inalámbricos Compactos con Larga Duración de Batería, Control por Teléfono, Reducción de Ruido de Llamadas de Voz Mejorada.",
+                images: [
+                    "https://i.imgur.com/bLpnIJH.png",
+                    "https://i.imgur.com/7s1zsbJ.png",
+                    "https://i.imgur.com/qCpyfEv.png",
+                    "https://i.imgur.com/tnnx1uz.png"
+                ],
+                colors: ['Blanco', 'Rosa claro', 'Negro']
+            },
+            {
+                id: 58,
+                title: "Auriculares Inalámbricos TWS con Pantalla LED Táctil",
+                category: "audifonos",
+                price: 20,
+                description: "Nuevos Auriculares Inalámbricos TWS con Pantalla LED Táctil In-Ear Auriculares Inalámbricos TWS Deportivos para Música Juegos Auriculares para iOS/Android.",
+                images: [
+                    "https://i.imgur.com/aQFQni4.png",
+                    "https://i.imgur.com/Hh8c4ox.png",
+                    "https://i.imgur.com/Nw0upq6.png"
+                ],
+                
+            },
+            {
+                id: 59,
+                title: "Estilo Nuevo 2025 Auriculares Inalámbricos",
+                category: "audifonos",
+                price: 280.00,
+                oldPrice: 350.00,
+                discount: 20,
+                description: "Estilo Nuevo 2025 Auriculares Inalámbricos, Auriculares Mini Cómodos TWS HIFI Dolby Bajos Estéreo HD para Llamadas, Adaptados para Android y iPhone.",
+                images: [
+                    "https://i.imgur.com/1icRYRw.png",
+                    "https://i.imgur.com/RFVLA3N.png",
+                    "https://i.imgur.com/DHwgcNZ.png"
+                ],
+                colors: ['Morado', 'Blanco', 'Negro']
+            },
+            {
+                id: 60,
+                title: "Audífonos Inalámbricos para Dormir BRIAME con Doble Micrófono",
+                category: "audifonos",
+                price: 19,
+                description: "Audífonos Inalámbricos para Dormir BRIAME con Doble Micrófono, Transmisión de Hueso de Sueño Verdadera y Baja Latencia - Diseño Ultradelgado, Reducción de Ruido, Ligeros y Cómodos para Uso Nocturno, Carga USB-C, Compatibles con iOS/Android.",
+                images: [
+                    "https://i.imgur.com/jFLxCmH.png",
+                    "https://i.imgur.com/XvZr2OL.png",
+                    "https://i.imgur.com/hA6cibn.png"
+                ],
+                
+            },
+            {
+                id: 61,
+                title: "Audífonos Inalámbricos con Cancelación Activa de Ruido",
+                category: "audifonos",
+                price: 19,
+                oldPrice: 27,
+                discount: 29,
+                description: "Audífonos Inalámbricos con Cancelación Activa de Ruido y Sonido HiFi Sin Pérdida, Estéreo de Alta Fidelidad Doble DD, Control por Botón, Compatibles con Android/iPhone.",
+                images: [
+                    "https://i.imgur.com/1Xnrf77.png",
+                    "https://i.imgur.com/lnsYBWT.png",
+                    "https://i.imgur.com/zZ3lROn.png"
+                ],
+                
+            },
+            {
+                id: 62,
+                title: "Auriculares inalámbricos compactos y ligeros",
+                category: "audifonos",
+                price: 35,
+                description: "Auriculares inalámbricos compactos y ligeros diseñados para música y llamadas, con cancelación de ruido..",
+                images: [
+                    "https://i.imgur.com/BNhrjWG.png",
+                    "https://i.imgur.com/oOBrAXI.png",
+                    "https://i.imgur.com/BNhrjWG.png"
+                    
+                ],
+                colors: ['Negro', 'Blanco']
+            }
+        ];
+
+        // Variables globales
+        let cart = [];
+        let currentProduct = null;
+        let selectedOptions = {};
+        const whatsappNumber = "+51980981154";
+
+        // Elementos del DOM
+        const productsContainer = document.getElementById('products-container');
+        const cartIcon = document.getElementById('cart-icon');
+        const cartCount = document.getElementById('cart-count');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const closeCart = document.getElementById('close-cart');
+        const cartItems = document.getElementById('cart-items');
+        const totalPrice = document.getElementById('total-price');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const overlay = document.getElementById('overlay');
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const productModal = document.getElementById('product-modal');
+        const closeModal = document.getElementById('close-modal');
+        const modalMainImage = document.getElementById('modal-main-image');
+        const thumbnailContainer = document.getElementById('thumbnail-container');
+        const modalTitle = document.getElementById('modal-title');
+        const modalCategory = document.getElementById('modal-category');
+        const modalPrice = document.getElementById('modal-price');
+        const modalOldPrice = document.getElementById('modal-old-price');
+        const modalDescription = document.getElementById('modal-description');
+        const modalAddToCart = document.getElementById('modal-add-to-cart');
+        const modalBuyNow = document.getElementById('modal-buy-now');
+        const optionsSelector = document.getElementById('options-selector');
+        const thumbnailPrev = document.getElementById('thumbnail-prev');
+        const thumbnailNext = document.getElementById('thumbnail-next');
+
+        // Mostrar productos
+        function displayProducts(productsToShow) {
+            productsContainer.innerHTML = '';
+            
+            productsToShow.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.setAttribute('data-category', product.category);
+                
+                let badge = '';
+                if (product.discount) {
+                    badge = `<div class="product-badge">${product.discount}% OFF</div>`;
+                }
+                
+                let oldPrice = '';
+                if (product.oldPrice) {
+                    oldPrice = `<span class="product-old-price">S/${product.oldPrice.toFixed(2)}</span>`;
+                }
+                
+                productCard.innerHTML = `
+                    ${badge}
+                    <div class="product-img">
+                        <img src="${product.images[0]}" alt="${product.title}">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</span>
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-price">
+                            S/${product.price.toFixed(2)} ${oldPrice}
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="${product.id}">Añadir al carrito</button>
+                            <button class="view-details" data-id="${product.id}">Ver detalles</button>
+                            <button class="buy-now" data-id="${product.id}">
+                                <i class="fab fa-whatsapp"></i> Comprar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                productsContainer.appendChild(productCard);
+            });
+            
+            // Agregar event listeners a los botones
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const productId = parseInt(e.target.getAttribute('data-id'));
+                    const product = products.find(p => p.id === productId);
+                    showProductModal(product);
+                });
+            });
+            
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const productId = parseInt(e.target.getAttribute('data-id'));
+                    const product = products.find(p => p.id === productId);
+                    showProductModal(product);
+                });
+            });
+            
+            document.querySelectorAll('.buy-now').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const productId = parseInt(e.target.getAttribute('data-id'));
+                    const product = products.find(p => p.id === productId);
+                    buyNowFromList(product);
+                });
+            });
+        }
+
+        // Mostrar opciones de selección según el tipo de producto
+        function displayProductOptions(product) {
+            optionsSelector.innerHTML = '';
+            selectedOptions = {};
+            
+            // Mostrar tallas para anillos y ropa
+            if ((product.category === 'anillos' || product.category === 'ropa') && product.sizes) {
+                const sizeGroup = document.createElement('div');
+                sizeGroup.className = 'option-group';
+                sizeGroup.innerHTML = `
+                    <h4>Talla:</h4>
+                    <div class="option-buttons" id="size-options">
+                        ${product.sizes.map(size => `
+                            <button class="option-btn" data-value="${size}">${size}</button>
+                        `).join('')}
+                    </div>
+                `;
+                optionsSelector.appendChild(sizeGroup);
+                
+                // Seleccionar la primera talla por defecto
+                const firstSizeBtn = sizeGroup.querySelector('.option-btn');
+                if (firstSizeBtn) {
+                    firstSizeBtn.classList.add('selected');
+                    selectedOptions.size = firstSizeBtn.getAttribute('data-value');
+                }
+                
+                // Event listener para seleccionar talla
+                sizeGroup.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        sizeGroup.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        selectedOptions.size = btn.getAttribute('data-value');
+                    });
+                });
+            }
+            
+            // Mostrar colores para productos que los tengan
+            if (product.colors) {
+                const colorGroup = document.createElement('div');
+                colorGroup.className = 'option-group';
+                colorGroup.innerHTML = `
+                    <h4>Color:</h4>
+                    <div class="option-buttons" id="color-options">
+                        ${product.colors.map((color, index) => `
+                            <button class="option-btn ${index === 0 ? 'selected' : ''}" 
+                                    data-value="${color}" 
+                                    data-image="${product.images[index]}">
+                                ${color}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+                optionsSelector.appendChild(colorGroup);
+                
+                // Seleccionar el primer color por defecto
+                const firstColorBtn = colorGroup.querySelector('.option-btn');
+                if (firstColorBtn) {
+                    firstColorBtn.classList.add('selected');
+                    selectedOptions.color = firstColorBtn.getAttribute('data-value');
+                    selectedOptions.image = firstColorBtn.getAttribute('data-image');
+                    
+                    // Mostrar la imagen correspondiente al color seleccionado
+                    const imageIndex = product.colors.indexOf(selectedOptions.color);
+                    if (imageIndex !== -1 && product.images[imageIndex]) {
+                        modalMainImage.src = product.images[imageIndex];
+                    }
+                }
+                
+                // Event listener para seleccionar color
+                colorGroup.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        colorGroup.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        selectedOptions.color = btn.getAttribute('data-value');
+                        selectedOptions.image = btn.getAttribute('data-image');
+                        
+                        // Cambiar imagen principal cuando se selecciona un color
+                        const imageIndex = product.colors.indexOf(selectedOptions.color);
+                        if (imageIndex !== -1 && product.images[imageIndex]) {
+                            modalMainImage.src = product.images[imageIndex];
+                        }
+                    });
+                });
+            }
+        }
+
+        // Mostrar modal de producto
+        function showProductModal(product) {
+            currentProduct = product;
+            
+            // Mostrar la primera imagen como principal
+            modalMainImage.src = currentProduct.images[0];
+            modalMainImage.alt = currentProduct.title;
+            
+            // Limpiar miniaturas anteriores
+            thumbnailContainer.innerHTML = '';
+            
+            // Agregar miniaturas
+            currentProduct.images.forEach((image, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+                thumbnail.innerHTML = `<img src="${image}" alt="Miniatura ${index + 1}">`;
+                
+                thumbnail.addEventListener('click', () => {
+                    // Cambiar imagen principal
+                    modalMainImage.src = image;
+                    
+                    // Actualizar miniaturas activas
+                    document.querySelectorAll('.thumbnail').forEach(thumb => {
+                        thumb.classList.remove('active');
+                    });
+                    thumbnail.classList.add('active');
+                });
+                
+                thumbnailContainer.appendChild(thumbnail);
+            });
+            
+            // Llenar información del producto
+            modalTitle.textContent = currentProduct.title;
+            modalCategory.textContent = currentProduct.category.charAt(0).toUpperCase() + currentProduct.category.slice(1);
+            modalPrice.textContent = `S/${currentProduct.price.toFixed(2)}`;
+            
+            if (currentProduct.oldPrice) {
+                modalOldPrice.textContent = `S/${currentProduct.oldPrice.toFixed(2)}`;
+                modalOldPrice.style.display = 'inline';
+            } else {
+                modalOldPrice.style.display = 'none';
+            }
+            
+            modalDescription.textContent = currentProduct.description;
+            
+            // Mostrar opciones de selección
+            displayProductOptions(currentProduct);
+            
+            // Actualizar botones del modal
+            modalAddToCart.setAttribute('data-id', currentProduct.id);
+            modalBuyNow.setAttribute('data-id', currentProduct.id);
+            
+            // Mostrar modal
+            productModal.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Navegar entre miniaturas
+        function navigateThumbnails(direction) {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            if (!thumbnails.length) return;
+            
+            let activeIndex = -1;
+            thumbnails.forEach((thumb, index) => {
+                if (thumb.classList.contains('active')) {
+                    activeIndex = index;
+                }
+            });
+            
+            let newIndex;
+            if (direction === 'prev') {
+                newIndex = activeIndex > 0 ? activeIndex - 1 : thumbnails.length - 1;
+            } else {
+                newIndex = activeIndex < thumbnails.length - 1 ? activeIndex + 1 : 0;
+            }
+            
+            // Cambiar imagen principal
+            modalMainImage.src = currentProduct.images[newIndex];
+            
+            // Actualizar miniaturas activas
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            thumbnails[newIndex].classList.add('active');
+            
+            // Hacer scroll a la miniatura seleccionada
+            thumbnails[newIndex].scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+            });
+        }
+
+        // Añadir al carrito desde el modal
+        function addToCartFromModal() {
+            if (!currentProduct) return;
+            
+            // Determinar qué imagen usar
+            let selectedImage = currentProduct.images[0];
+            if (selectedOptions.image) {
+                selectedImage = selectedOptions.image;
+            } else if (selectedOptions.color && currentProduct.colors) {
+                const colorIndex = currentProduct.colors.indexOf(selectedOptions.color);
+                if (colorIndex !== -1 && currentProduct.images[colorIndex]) {
+                    selectedImage = currentProduct.images[colorIndex];
+                }
+            }
+            
+            // Crear objeto de producto con las opciones seleccionadas
+            const productToAdd = {
+                ...currentProduct,
+                selectedOptions: {...selectedOptions},
+                quantity: 1,
+                selectedImage: selectedImage // Guardamos la imagen seleccionada
+            };
+            
+            // Verificar si el producto ya está en el carrito con las mismas opciones
+            const existingItemIndex = cart.findIndex(item => 
+                item.id === currentProduct.id && 
+                JSON.stringify(item.selectedOptions) === JSON.stringify(selectedOptions)
+            );
+            
+            if (existingItemIndex !== -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push(productToAdd);
+            }
+            
+            updateCart();
+            showNotification(`${currentProduct.title} añadido al carrito`);
+            
+            // Cerrar el modal
+            productModal.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Comprar ahora desde la lista de productos (WhatsApp)
+        function buyNowFromList(product) {
+            if (!product) return;
+            
+            let message = `Hola, estoy interesado en comprar el producto: ${product.title} - Precio: S/${product.price.toFixed(2)}`;
+            
+            // Agregar opciones por defecto al mensaje
+            if (product.sizes) {
+                message += `\nTalla: ${product.sizes[0]}`;
+            }
+            if (product.colors) {
+                message += `\nColor: ${product.colors[0]}`;
+            }
+            
+            message += `\n\nPor favor, indíqueme cómo proceder con la compra.`;
+            
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Comprar ahora desde el modal (WhatsApp)
+        function buyNowFromModal() {
+            if (!currentProduct) return;
+            
+            let message = `Hola, estoy interesado en comprar el producto: ${currentProduct.title} - Precio: S/${currentProduct.price.toFixed(2)}`;
+            
+            // Agregar opciones seleccionadas al mensaje
+            if (selectedOptions.size) {
+                message += `\nTalla: ${selectedOptions.size}`;
+            }
+            if (selectedOptions.color) {
+                message += `\nColor: ${selectedOptions.color}`;
+            }
+            
+            message += `\n\nPor favor, indíqueme cómo proceder con la compra.`;
+            
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Actualizar carrito
+        function updateCart() {
+            // Actualizar contador
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Actualizar lista de productos
+            cartItems.innerHTML = '';
+            
+            let total = 0;
+            
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                // Mostrar opciones seleccionadas
+                let variantText = '';
+                if (item.selectedOptions) {
+                    const options = [];
+                    if (item.selectedOptions.size) options.push(`Talla: ${item.selectedOptions.size}`);
+                    if (item.selectedOptions.color) options.push(`Color: ${item.selectedOptions.color}`);
+                    variantText = options.join(' | ');
+                }
+                
+                // Usar la imagen seleccionada o la primera imagen por defecto
+                const itemImage = item.selectedImage || item.images[0];
+                
+                cartItem.innerHTML = `
+                    <div class="cart-item-img">
+                        <img src="${itemImage}" alt="${item.title}">
+                    </div>
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-title">${item.title}</h4>
+                        ${variantText ? `<div class="cart-item-variant">${variantText}</div>` : ''}
+                        <div class="cart-item-price">S/${item.price.toFixed(2)}</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn decrease" data-id="${item.id}" data-options='${JSON.stringify(item.selectedOptions)}'>-</button>
+                            <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}" data-options='${JSON.stringify(item.selectedOptions)}'>
+                            <button class="quantity-btn increase" data-id="${item.id}" data-options='${JSON.stringify(item.selectedOptions)}'>+</button>
+                            <button class="remove-item" data-id="${item.id}" data-options='${JSON.stringify(item.selectedOptions)}'>
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            // Actualizar total
+            totalPrice.textContent = `S/${total.toFixed(2)}`;
+            
+            // Agregar event listeners
+            document.querySelectorAll('.decrease').forEach(button => {
+                button.addEventListener('click', decreaseQuantity);
+            });
+            
+            document.querySelectorAll('.increase').forEach(button => {
+                button.addEventListener('click', increaseQuantity);
+            });
+            
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', changeQuantity);
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', removeItem);
+            });
+        }
+
+        // Disminuir cantidad
+        function decreaseQuantity(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            const options = JSON.parse(e.target.getAttribute('data-options'));
+            
+            const itemIndex = cart.findIndex(item => 
+                item.id === productId && 
+                JSON.stringify(item.selectedOptions) === JSON.stringify(options)
+            );
+            
+            if (itemIndex !== -1) {
+                if (cart[itemIndex].quantity > 1) {
+                    cart[itemIndex].quantity -= 1;
+                    updateCart();
+                }
+            }
+        }
+
+        // Aumentar cantidad
+        function increaseQuantity(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            const options = JSON.parse(e.target.getAttribute('data-options'));
+            
+            const itemIndex = cart.findIndex(item => 
+                item.id === productId && 
+                JSON.stringify(item.selectedOptions) === JSON.stringify(options)
+            );
+            
+            if (itemIndex !== -1) {
+                cart[itemIndex].quantity += 1;
+                updateCart();
+            }
+        }
+
+        // Cambiar cantidad manualmente
+        function changeQuantity(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            const options = JSON.parse(e.target.getAttribute('data-options'));
+            const newQuantity = parseInt(e.target.value);
+            
+            const itemIndex = cart.findIndex(item => 
+                item.id === productId && 
+                JSON.stringify(item.selectedOptions) === JSON.stringify(options)
+            );
+            
+            if (itemIndex !== -1 && newQuantity >= 1) {
+                cart[itemIndex].quantity = newQuantity;
+                updateCart();
+            }
+        }
+
+        // Eliminar item
+        function removeItem(e) {
+            const productId = parseInt(e.target.closest('button').getAttribute('data-id'));
+            const options = JSON.parse(e.target.closest('button').getAttribute('data-options'));
+            
+            cart = cart.filter(item => 
+                !(item.id === productId && JSON.stringify(item.selectedOptions) === JSON.stringify(options))
+            );
+            
+            updateCart();
+            showNotification('Producto eliminado del carrito');
+        }
+
+        // Completar compra (WhatsApp)
+        function completeCheckout() {
+            if (cart.length === 0) {
+                showNotification('El carrito está vacío');
+                return;
+            }
+            
+            let message = 'Hola, estoy interesado en los siguientes productos:\n\n';
+            
+            cart.forEach(item => {
+                message += `- ${item.title}`;
+                
+                // Mostrar opciones seleccionadas
+                if (item.selectedOptions) {
+                    const options = [];
+                    if (item.selectedOptions.size) options.push(`Talla: ${item.selectedOptions.size}`);
+                    if (item.selectedOptions.color) options.push(`Color: ${item.selectedOptions.color}`);
+                    if (options.length > 0) message += ` (${options.join(', ')})`;
+                }
+                
+                message += ` (${item.quantity} x S/${item.price.toFixed(2)}) = S/${(item.quantity * item.price).toFixed(2)}\n`;
+            });
+            
+            message += `\nTotal: S/${totalPrice.textContent.replace('S/', '')}\n\nPor favor, indíqueme cómo proceder con la compra.`;
+            
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Filtrar por categoría
+        function filterByCategory(category) {
+            if (category === 'all') {
+                displayProducts(products);
+            } else {
+                const filteredProducts = products.filter(product => product.category === category);
+                displayProducts(filteredProducts);
+            }
+        }
+
+        // Buscar productos
+        function searchProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            if (searchTerm.trim() === '') {
+                displayProducts(products);
+                return;
+            }
+            
+            const filteredProducts = products.filter(product => 
+                product.title.toLowerCase().includes(searchTerm) || 
+                product.description.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm)
+            );
+            
+            displayProducts(filteredProducts);
+        }
+
+        // Mostrar notificación
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Event listeners
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        overlay.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            productModal.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        checkoutBtn.addEventListener('click', completeCheckout);
+
+        searchBtn.addEventListener('click', searchProducts);
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchProducts();
+            }
+        });
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                filterByCategory(button.getAttribute('data-category'));
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            productModal.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        modalAddToCart.addEventListener('click', addToCartFromModal);
+        modalBuyNow.addEventListener('click', buyNowFromModal);
+
+        thumbnailPrev.addEventListener('click', () => navigateThumbnails('prev'));
+        thumbnailNext.addEventListener('click', () => navigateThumbnails('next'));
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            displayProducts(products);
+        });
+    </script>
+</body>
+</html>
